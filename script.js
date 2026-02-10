@@ -104,11 +104,10 @@ function atualizarTotal() {
     document.querySelector('h1.text-3xl').textContent = `Total de animais: ${totalAnimais} e ${volTotalGeral} Litros.`;
     document.querySelector('#pela-manha').classList.replace('card-pela-tarde', 'card-pela-manha');
     document.querySelector('#pela-manha').textContent = `Pela manhã: ${volTotalManha} Litros`;    
-    document.querySelector('#tambor-a').textContent = `Tambor A (6,75kg): Preparar ${volTamborA_Manha}L para Amarelo.`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (6,25kg): Preparar ${volTamborB_Manha}L para os demais.`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (6,25kg): Preparar ${volTamborB_Manha}L para os demais.`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (6,25kg): Preparar ${volTamborB_Manha}L para os demais.`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (6,25kg): Preparar ${volTamborB_Manha}L para os demais.`;
+    document.querySelector('#tambor-a').textContent = `Tambor A (1,35 g/L): Preparar ${volTamborA_Manha}L para Amarelo. Total sucedâneo ${parseFloat(volTamborA_Manha * 1.35).toFixed(2)}g`;
+    document.querySelector('#tambor-b').textContent = `Tambor B (1,25 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 1.25).toFixed(2)}g`;
+    document.querySelector('#tambor-b').textContent = `Tambor B (1,25 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 1.25).toFixed(2)}g`;
+    document.querySelector('#tambor-b').textContent = `Tambor B (1,25 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 1.25).toFixed(2)}g`;
     document.querySelector('#totalLeiteDiario').textContent = `Total de Leite Diário: ${volTotalGeral} L`;
     document.querySelector('#conSucDiario').textContent = `Consumo sucedâneo diário: ${qtSucGeral} g`;
     document.querySelector('#totalAnimais').textContent = `Total de animais: ${totalAnimais}`;
@@ -119,8 +118,8 @@ btnManha.addEventListener('click', function(){
     valores = atualizarTotal();
     document.querySelector('#pela-manha').classList.replace('card-pela-tarde', 'card-pela-manha');
     document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalManha} Litros`;    
-    document.querySelector('#tambor-a').textContent = `Tambor A (6,75kg): Preparar ${valores.volTamborA_Manha}L para Amarelo.`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (6,25kg): Preparar ${valores.volTamborB_Manha}L para os demais.`;
+    document.querySelector('#tambor-a').textContent = `Tambor A (1,35 g/L): Preparar ${valores.volTamborA_Manha}L para Amarelo. Total sucedâneo ${parseFloat(valores.volTamborA_Manha * 1.35).toFixed(2)}g`;
+    document.querySelector('#tambor-b').textContent = `Tambor B (1,25 g/L): Preparar ${valores.volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(valores.volTamborB_Manha * 1.25).toFixed(2)}g`;
     
 });
 
@@ -128,8 +127,8 @@ btnTarde.addEventListener('click', function(){
     valores = atualizarTotal();
     document.querySelector('#pela-manha').classList.replace('card-pela-manha', 'card-pela-tarde');
     document.querySelector('#pela-manha').textContent = `Pela tarde: ${valores.volTotalTarde} Litros`;
-    document.querySelector('#tambor-a').textContent = `Tambor A (6,75kg): Preparar ${valores.volTamborA_Tarde}L para Amarelo.`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (6,25kg): Preparar ${valores.volTamborB_Tarde}L para o Azul.`;
+    document.querySelector('#tambor-a').textContent = `Tambor A (1,35 g/L): Preparar ${valores.volTamborA_Tarde}L para Amarelo. Total sucedâneo ${parseFloat(valores.volTamborA_Tarde * 1.35).toFixed(2)}g`;
+    document.querySelector('#tambor-b').textContent = `Tambor B (1,25 g/L): Preparar ${valores.volTamborB_Tarde}L para o Azul. Total sucedâneo ${parseFloat(valores.volTamborB_Tarde * 1.25).toFixed(2)}g`;
     
     
 });
