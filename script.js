@@ -21,14 +21,16 @@ pelaManha = document.getElementById('pela-manha');
 
 //Contagem dos valores do inputs
 const qtAmarelo = document.getElementById('qt-amarelo');
-const qtAzul = document.getElementById('qt-azul');
+const qtAzul1 = document.getElementById('qt-azul1');
 const qtVerde = document.getElementById('qt-verde');
 const qtSemColar = document.getElementById('qt-sem-colar');
+const qtAzul2 = document.getElementById('qt-azul2');
 
 qtAmarelo.addEventListener('input', atualizarTotal);
-qtAzul.addEventListener('input', atualizarTotal);
+qtAzul1.addEventListener('input', atualizarTotal);
 qtVerde.addEventListener('input', atualizarTotal);
 qtSemColar.addEventListener('input', atualizarTotal);
+qtAzul2.addEventListener('input', atualizarTotal);
 
 
 
@@ -36,47 +38,53 @@ qtSemColar.addEventListener('input', atualizarTotal);
 // Função para atualizar o total de animais e litros de sucedâneo
 function atualizarTotal() {
     var qtAmareloInt = parseInt(qtAmarelo.value);
-    var qtAzulInt = parseInt(qtAzul.value);
+    var qtAzulInt1 = parseInt(qtAzul1.value);
+    var qtAzulInt2 = parseInt(qtAzul2.value);
     var qtVerdeInt = parseInt(qtVerde.value);
     var qtSemColarInt = parseInt(qtSemColar.value);
-    var totalAnimais = qtAmareloInt + qtAzulInt + qtVerdeInt + qtSemColarInt;
+    var totalAnimais = qtAmareloInt + qtAzulInt1 + qtAzulInt2 + qtVerdeInt + qtSemColarInt;
 
     // 2. LÓGICA DE CÁLCULO 
     // Dosagens Unitárias Manhã
     const doseAmareloManha = 3;
-    const doseAzulManha = 4;
+    const doseAzul1Manha = 4;
+    const doseAzul2Manha = 4;
     const doseVerdeManha = 4;
     const  doseSemColarManha = 2;
 
     // Dosagens Unitárias Manhã
     const doseAmareloTarde = 3;
-    const doseAzulTarde = 4;
+    const doseAzul1Tarde = 3;
+    const doseAzul2Tarde = 4;
     const doseVerdeTarde = 0;
     const doseSemColarTarde = 0;
 
     // Cálculos Manhã
     let volManhaAmarelo = qtAmareloInt * doseAmareloManha;
-    let volManhaAzul = qtAzulInt * doseAzulManha;
+    let volManhaAzul1 = qtAzulInt1 * doseAzul1Manha;
+    let volManhaAzul2 = qtAzulInt2 * doseAzul2Manha;
     let volManhaVerde = qtVerdeInt * doseVerdeManha;
     let volManhaSemColar = qtSemColarInt * doseSemColarManha;
     
-    let volManhaOutros = volManhaAzul + volManhaVerde + volManhaSemColar;
-    let volTotalManha = volManhaAmarelo + volManhaAzul + volManhaVerde + volManhaSemColar;
+    let volManhaOutros = volManhaAzul1 + volManhaAzul2 + volManhaVerde + volManhaSemColar;
+    let volTotalManha = volManhaAmarelo + volManhaAzul1 + volManhaAzul2 + volManhaVerde + volManhaSemColar;
 
     // Cálculos Tarde (Verde e Sem Colar não bebem à tarde)
     let volTardeAmarelo = qtAmareloInt * doseAmareloTarde;
-    let volTardeAzul = qtAzulInt * doseAzulTarde;
+    let volTardeAzul1 = qtAzulInt1 * doseAzul1Tarde;
+    let volTardeAzul2 = qtAzulInt2 * doseAzul2Tarde;
     let volTardeVerde = qtVerdeInt * doseVerdeTarde;
     let volTardeSemColar = qtSemColarInt * doseSemColarTarde;
 
-    let volTotalTarde = volTardeAmarelo + volTardeAzul + volTardeVerde + volTardeSemColar;
+    let volTotalTarde = volTardeAmarelo + volTardeAzul1 + volTardeAzul2 + volTardeVerde + volTardeSemColar;
 
     //Cálculo do total geral
     let volTotalGeral = volTotalManha + volTotalTarde;
 
     //calculo g/L de sucedâneo em cada preparo
     let volTotalAmarelo = volManhaAmarelo + volTardeAmarelo;
-    let volTotalAzul = volManhaAzul + volTardeAzul;
+    let volTotalAzul1 = volManhaAzul1 + volTardeAzul1;
+    let volTotalAzul2 = volManhaAzul2 + volTardeAzul2;
     let volTotalVerde = volManhaVerde + volTardeVerde;
     let volTotalSemColar = volManhaSemColar + volTardeSemColar;
 
@@ -85,7 +93,7 @@ function atualizarTotal() {
     let volTamborB_Manha = volManhaOutros;
 
     let volTamborA_Tarde = volTardeAmarelo;
-    let volTamborB_Tarde = volTardeAzul;
+    let volTamborB_Tarde = volTardeAzul1 + volTardeAzul2 + volTardeVerde + volTardeSemColar;
     
    
     let volTamborA = volTamborA_Manha + volTamborA_Tarde;
@@ -93,13 +101,7 @@ function atualizarTotal() {
     let qtSucTamborA = volTamborA * 135;
     let qtSucTamborB = volTamborB * 125;
     let qtSucGeral = qtSucTamborA + qtSucTamborB;
-    /*
-
-    //Cálculo do consumo diário de sucedâneo em gramas
-    let qtSucedaneoA = (parseFloat(volTamborA) * 135);
-    let qtSucedaneoB = (parseFloat(volTamborB) * 125);
-    let qtSucedaneoGeral = qtSucedaneoA + qtSucedaneoB;
-    */
+  
 
     document.querySelector('h1.text-3xl').textContent = `Total de animais: ${totalAnimais} e ${volTotalGeral} Litros.`;
     document.querySelector('#pela-manha').classList.replace('card-pela-tarde', 'card-pela-manha');
