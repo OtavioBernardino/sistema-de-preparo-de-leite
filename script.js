@@ -112,15 +112,12 @@ function atualizarTotal() {
     document.querySelector('#pela-manha').textContent = `Pela manhã: ${volTotalManha} litros usando ${qtSucTamborA_Manha + qtSucTamborB_Manha}g de sucedâneo para ${totalAnimais} animais.`;    
     document.querySelector('#tambor-a').textContent = `Tambor A (135 g/L): Preparar ${volTamborA_Manha}L para Amarelo. Total sucedâneo ${parseFloat(volTamborA_Manha * 135).toFixed(0)}g`;
     document.querySelector('#tambor-b').textContent = `Tambor B (125 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 125).toFixed(0)}g`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (125 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 125).toFixed(0)}g`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (125 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 125).toFixed(0)}g`;
-    document.querySelector('#totalLeiteDiario').textContent = `Total de Leite Diário: ${volTotalGeral} L`;
-    document.querySelector('#conSucDiario').textContent = `Consumo sucedâneo diário: ${qtSucGeral} g`;
-    document.querySelector('#totalAnimais').textContent = `Total de animais: ${totalAnimais}`;
+    
     return {volTotalManha, volTotalTarde, volTotalGeral,volTamborA_Manha,volTamborA_Tarde,volTamborB_Manha,volTamborB_Tarde,qtSucTamborA_Manha, qtSucTamborB_Manha, qtSucTamborA_Tarde, qtSucTamborB_Tarde, qtSucGeral,totalAnimais};
 }
 
 btnManha.addEventListener('click', function(){
+    //alert('Botão manhã clicado');
     valores = atualizarTotal();
     document.querySelector('#pela-manha').classList.replace('card-pela-tarde', 'card-pela-manha');
     document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalManha} litros usando ${valores.qtSucTamborA_Manha + valores.qtSucTamborB_Manha}g de sucedâneo para ${valores.totalAnimais} animais.`;    
@@ -130,6 +127,7 @@ btnManha.addEventListener('click', function(){
 });
 
 btnTarde.addEventListener('click', function(){
+    //alert('Botão tarde clicado');
     valores = atualizarTotal();
     document.querySelector('#pela-manha').classList.replace('card-pela-manha', 'card-pela-tarde');
     document.querySelector('#pela-manha').textContent = `Pela tarde: ${valores.volTotalTarde} litros usando ${valores.qtSucTamborA_Tarde + valores.qtSucTamborB_Tarde}g de sucedâneo para ${valores.totalAnimais} animais.`; 
