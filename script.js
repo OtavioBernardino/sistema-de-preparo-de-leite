@@ -45,43 +45,45 @@ function atualizarTotal() {
     var totalAnimais = qtAmareloInt + qtAzulInt1 + qtAzulInt2 + qtVerdeInt + qtSemColarInt;
 
     // 2. LÓGICA DE CÁLCULO 
-    // Dosagens Unitárias Manhã
+    // Dosagens Unitárias Manhã em litros
     const doseAmareloManha = 3;
     const doseAzul1Manha = 4;
     const doseAzul2Manha = 4;
     const doseVerdeManha = 4;
     const  doseSemColarManha = 2;
 
-    // Dosagens Unitárias Manhã
+    // Dosagens Unitárias Tarde em litros
     const doseAmareloTarde = 3;
-    const doseAzul1Tarde = 3;
+    const doseAzul1Tarde = 4;
     const doseAzul2Tarde = 4;
     const doseVerdeTarde = 0;
     const doseSemColarTarde = 0;
 
-    // Cálculos Manhã
+    // Cálculos Manhã de litros para cada grupo
     let volManhaAmarelo = qtAmareloInt * doseAmareloManha;
     let volManhaAzul1 = qtAzulInt1 * doseAzul1Manha;
     let volManhaAzul2 = qtAzulInt2 * doseAzul2Manha;
     let volManhaVerde = qtVerdeInt * doseVerdeManha;
     let volManhaSemColar = qtSemColarInt * doseSemColarManha;
-    
-    let volManhaOutros = volManhaAzul1 + volManhaAzul2 + volManhaVerde + volManhaSemColar;
+
+    // volume total de leite em litros para a manhã
     let volTotalManha = volManhaAmarelo + volManhaAzul1 + volManhaAzul2 + volManhaVerde + volManhaSemColar;
 
-    // Cálculos Tarde (Verde e Sem Colar não bebem à tarde)
+    // Cálculos Tarde (Verde e Sem Colar não bebem à tarde) de litros para cada grupo
     let volTardeAmarelo = qtAmareloInt * doseAmareloTarde;
     let volTardeAzul1 = qtAzulInt1 * doseAzul1Tarde;
     let volTardeAzul2 = qtAzulInt2 * doseAzul2Tarde;
     let volTardeVerde = qtVerdeInt * doseVerdeTarde;
     let volTardeSemColar = qtSemColarInt * doseSemColarTarde;
 
+    //volume total de leite em litros para a tarde
     let volTotalTarde = volTardeAmarelo + volTardeAzul1 + volTardeAzul2 + volTardeVerde + volTardeSemColar;
 
-    //Cálculo do total geral
+    //Cálculo do volume em L geral, manhã e tarde
     let volTotalGeral = volTotalManha + volTotalTarde;
 
-    //calculo g/L de sucedâneo em cada preparo
+
+    //calculo do total de litros de leite do dia por grupo
     let volTotalAmarelo = volManhaAmarelo + volTardeAmarelo;
     let volTotalAzul1 = volManhaAzul1 + volTardeAzul1;
     let volTotalAzul2 = volManhaAzul2 + volTardeAzul2;
@@ -89,50 +91,66 @@ function atualizarTotal() {
     let volTotalSemColar = volManhaSemColar + volTardeSemColar;
 
     
-    let volTamborA_Manha = volManhaAmarelo;
-    let volTamborB_Manha = volManhaOutros;
+   // ***** Cálculo do total de sucedâneo em gramas para cada tambor e total geral *****
+   let qtSucTotalTarde = volTotalTarde * 135;
+   let qtSucTotalManha = volTotalManha * 135;
 
-    let volTamborA_Tarde = volTardeAmarelo;
-    let volTamborB_Tarde = volTardeAzul1 + volTardeAzul2 + volTardeVerde + volTardeSemColar;
+
+    //Quantidade de sucedâneo utilizado para o preparo do leite do dia
+    let qtSucGeral = qtSucTotalTarde + qtSucTotalManha;
+
+    //calculo dos tambores completos e o restante da manhã
+    var tamborInteiroManha = Math.trunc(volTotalManha/50);
+    var sucTamborInteiroManha = ((tamborInteiroManha*50)*135).toFixed(0);
+    var tamborRestanteManha = (volTotalManha/50)-tamborInteiroManha;
+    var sucTamborRestanteManha = ((tamborRestanteManha*50)*135).toFixed(0);
+    var litrosTamborRestanteManha = (tamborRestanteManha*50).toFixed(1);
     
-   // Cálculo do total de sucedâneo em gramas para cada tambor e total geral
-    let volTamborA = volTamborA_Manha + volTamborA_Tarde;
-    let volTamborB = volTamborB_Manha + volTamborB_Tarde;
-    let qtSucTamborA_Manha = volTamborA_Manha * 135;
-    let qtSucTamborB_Manha = volTamborB_Manha * 125;
-    let qtSucTamborA_Tarde = volTamborA_Tarde * 135;
-    let qtSucTamborB_Tarde = volTamborB_Tarde * 125;
-    let qtSucTamborA = volTamborA * 135;
-    let qtSucTamborB = volTamborB * 125;
-    let qtSucGeral = qtSucTamborA + qtSucTamborB;
+
+    //calculo dos tambores completos e o restante da tarde
+    var tamborInteiroTarde = Math.trunc(volTotalTarde/50);
+    var sucTamborInteiroTarde = ((tamborInteiroTarde*50)*135).toFixed(0);
+    var tamborRestanteTarde = (volTotalTarde/50)-tamborInteiroTarde;
+    var sucTamborRestanteTarde = ((tamborRestanteTarde*50)*135).toFixed(0);
+    var litrosTamborRestanteTarde = (tamborRestanteTarde*50).toFixed(1);
+
   
-
+    //atualizando o primeiro texto que mostra a quantidade de animais e litros de leite
     document.querySelector('h1.text-3xl').textContent = `Total de animais: ${totalAnimais} e ${volTotalGeral} Litros.`;
+
     document.querySelector('#pela-manha').classList.replace('card-pela-tarde', 'card-pela-manha');
-    document.querySelector('#pela-manha').textContent = `Pela manhã: ${volTotalManha} litros usando ${qtSucTamborA_Manha + qtSucTamborB_Manha}g de sucedâneo para ${totalAnimais} animais.`;    
-    document.querySelector('#tambor-a').textContent = `Tambor A (135 g/L): Preparar ${volTamborA_Manha}L para Amarelo. Total sucedâneo ${parseFloat(volTamborA_Manha * 135).toFixed(0)}g`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (125 g/L): Preparar ${volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(volTamborB_Manha * 125).toFixed(0)}g`;
     
-    return {volTotalManha, volTotalTarde, volTotalGeral,volTamborA_Manha,volTamborA_Tarde,volTamborB_Manha,volTamborB_Tarde,qtSucTamborA_Manha, qtSucTamborB_Manha, qtSucTamborA_Tarde, qtSucTamborB_Tarde, qtSucGeral,totalAnimais};
+    document.querySelector('#pela-manha').textContent = `Pela manhã: ${volTotalManha} litros usando ${qtSucTotalManha}g ou ${(qtSucTotalManha)/1000}kg de sucedâneo para ${totalAnimais} animais.
+    Fazer ${tamborInteiroManha} tambor usando ${sucTamborInteiroManha}g de sucedâneo; e ${litrosTamborRestanteManha}L usando ${sucTamborRestanteManha}g de sucedâneo.`;    
+   
+    return {volTotalManha, volTotalTarde, volTotalGeral, qtSucGeral,totalAnimais,qtSucTotalTarde,qtSucTotalManha, tamborInteiroManha, tamborRestanteManha, tamborInteiroTarde, tamborRestanteTarde, sucTamborInteiroManha, sucTamborInteiroTarde, sucTamborRestanteManha, sucTamborRestanteTarde, litrosTamborRestanteManha, litrosTamborRestanteTarde};
 }
 
 btnManha.addEventListener('click', function(){
-    //alert('Botão manhã clicado');
+    alert('Botão manhã clicado');
+
+    //chamada da função atualizarTotal() para conseguir os valores.
     valores = atualizarTotal();
+
     document.querySelector('#pela-manha').classList.replace('card-pela-tarde', 'card-pela-manha');
-    document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalManha} litros usando ${valores.qtSucTamborA_Manha + valores.qtSucTamborB_Manha}g de sucedâneo para ${valores.totalAnimais} animais.`;    
-    document.querySelector('#tambor-a').textContent = `Tambor A (135 g/L): Preparar ${valores.volTamborA_Manha}L para Amarelo. Total sucedâneo ${parseFloat(valores.volTamborA_Manha * 135).toFixed(0)}g`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (125 g/L): Preparar ${valores.volTamborB_Manha}L para os demais. Total sucedâneo ${parseFloat(valores.volTamborB_Manha * 125).toFixed(0)}g`;
+ 
+
+    
+    document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalManha} litros usando ${valores.qtSucTotalManha}g ou ${(valores.qtSucTotalManha)/1000}kg de sucedâneo para ${valores.totalAnimais} animais.
+    Fazer ${valores.tamborInteiroManha} tambor usando ${valores.sucTamborInteiroManha}g de sucedâneo; e ${valores.litrosTamborRestanteManha}L usando ${(tamborRestanteManha*50)*135}g de sucedâneo.`;    
+   
     
 });
 
 btnTarde.addEventListener('click', function(){
-    //alert('Botão tarde clicado');
+    alert('Botão tarde clicado');
+
     valores = atualizarTotal();
+
     document.querySelector('#pela-manha').classList.replace('card-pela-manha', 'card-pela-tarde');
-    document.querySelector('#pela-manha').textContent = `Pela tarde: ${valores.volTotalTarde} litros usando ${valores.qtSucTamborA_Tarde + valores.qtSucTamborB_Tarde}g de sucedâneo para ${valores.totalAnimais} animais.`; 
-    document.querySelector('#tambor-a').textContent = `Tambor A (135 g/L): Preparar ${valores.volTamborA_Tarde}L para Amarelo. Total sucedâneo ${parseFloat(valores.volTamborA_Tarde * 135).toFixed(0)}g`;
-    document.querySelector('#tambor-b').textContent = `Tambor B (125 g/L): Preparar ${valores.volTamborB_Tarde}L para o Azul. Total sucedâneo ${parseFloat(valores.volTamborB_Tarde * 125).toFixed(0)}g`;
+  
+
+    document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalTarde} litros usando ${valores.qtSucTotalTarde}g ou ${(valores.qtSucTotalTarde)/1000}kg de sucedâneo para ${valores.totalAnimais} animais.
+    Fazer ${valores.tamborInteiroTarde} tambor usando ${(valores.tamborInteiroTarde*50)*135}g de sucedâneo; e ${valores.litrosTamborRestanteTarde}L usando ${valores.sucTamborRestanteTarde}g de sucedâneo.`; 
     
-    
-});
+}); 
