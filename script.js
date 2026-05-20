@@ -150,7 +150,7 @@ btnTarde.addEventListener('click', function(){
     document.querySelector('#pela-manha').classList.replace('card-pela-manha', 'card-pela-tarde');
   
 
-    document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalTarde} litros usando ${valores.qtSucTotalTarde}g ou ${(valores.qtSucTotalTarde)/1000}kg de sucedâneo para ${valores.totalAnimais} animais.
+    document.querySelector('#pela-manha').textContent = `Pela tarde: ${valores.volTotalTarde} litros usando ${valores.qtSucTotalTarde}g ou ${(valores.qtSucTotalTarde)/1000}kg de sucedâneo para ${valores.totalAnimais} animais.
     Fazer ${valores.tamborInteiroTarde} tambor usando ${(valores.tamborInteiroTarde*50)*135}g de sucedâneo; e ${valores.litrosTamborRestanteTarde}L usando ${valores.sucTamborRestanteTarde}g de sucedâneo.`; 
     
 }); 
