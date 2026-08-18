@@ -24,13 +24,13 @@ const qtAmarelo = document.getElementById('qt-amarelo');
 const qtAzul1 = document.getElementById('qt-azul1');
 const qtVerde = document.getElementById('qt-verde');
 const qtSemColar = document.getElementById('qt-sem-colar');
-const qtAzul2 = document.getElementById('qt-azul2');
+
 
 qtAmarelo.addEventListener('input', atualizarTotal);
 qtAzul1.addEventListener('input', atualizarTotal);
 qtVerde.addEventListener('input', atualizarTotal);
 qtSemColar.addEventListener('input', atualizarTotal);
-qtAzul2.addEventListener('input', atualizarTotal);
+
 
 
 
@@ -39,45 +39,42 @@ qtAzul2.addEventListener('input', atualizarTotal);
 function atualizarTotal() {
     var qtAmareloInt = parseInt(qtAmarelo.value);
     var qtAzulInt1 = parseInt(qtAzul1.value);
-    var qtAzulInt2 = parseInt(qtAzul2.value);
+
     var qtVerdeInt = parseInt(qtVerde.value);
     var qtSemColarInt = parseInt(qtSemColar.value);
-    var totalAnimais = qtAmareloInt + qtAzulInt1 + qtAzulInt2 + qtVerdeInt + qtSemColarInt;
+    var totalAnimais = qtAmareloInt + qtAzulInt1 + qtVerdeInt + qtSemColarInt;
 
     // 2. LÓGICA DE CÁLCULO 
     // Dosagens Unitárias Manhã em litros
     const doseAmareloManha = 4;
     const doseAzul1Manha = 4;
-    const doseAzul2Manha = 4;
     const doseVerdeManha = 4;
     const  doseSemColarManha = 2;
 
     // Dosagens Unitárias Tarde em litros
     const doseAmareloTarde = 3;
     const doseAzul1Tarde = 4;
-    const doseAzul2Tarde = 4;
+
     const doseVerdeTarde = 0;
     const doseSemColarTarde = 0;
 
     // Cálculos Manhã de litros para cada grupo
     let volManhaAmarelo = qtAmareloInt * doseAmareloManha;
     let volManhaAzul1 = qtAzulInt1 * doseAzul1Manha;
-    let volManhaAzul2 = qtAzulInt2 * doseAzul2Manha;
     let volManhaVerde = qtVerdeInt * doseVerdeManha;
     let volManhaSemColar = qtSemColarInt * doseSemColarManha;
 
     // volume total de leite em litros para a manhã
-    let volTotalManha = volManhaAmarelo + volManhaAzul1 + volManhaAzul2 + volManhaVerde + volManhaSemColar;
+    let volTotalManha = volManhaAmarelo + volManhaAzul1 + volManhaVerde + volManhaSemColar;
 
     // Cálculos Tarde (Verde e Sem Colar não bebem à tarde) de litros para cada grupo
     let volTardeAmarelo = qtAmareloInt * doseAmareloTarde;
     let volTardeAzul1 = qtAzulInt1 * doseAzul1Tarde;
-    let volTardeAzul2 = qtAzulInt2 * doseAzul2Tarde;
     let volTardeVerde = qtVerdeInt * doseVerdeTarde;
     let volTardeSemColar = qtSemColarInt * doseSemColarTarde;
 
     //volume total de leite em litros para a tarde
-    let volTotalTarde = volTardeAmarelo + volTardeAzul1 + volTardeAzul2 + volTardeVerde + volTardeSemColar;
+    let volTotalTarde = volTardeAmarelo + volTardeAzul1  + volTardeVerde + volTardeSemColar;
 
     //Cálculo do volume em L geral, manhã e tarde
     let volTotalGeral = volTotalManha + volTotalTarde;
@@ -86,7 +83,6 @@ function atualizarTotal() {
     //calculo do total de litros de leite do dia por grupo
     let volTotalAmarelo = volManhaAmarelo + volTardeAmarelo;
     let volTotalAzul1 = volManhaAzul1 + volTardeAzul1;
-    let volTotalAzul2 = volManhaAzul2 + volTardeAzul2;
     let volTotalVerde = volManhaVerde + volTardeVerde;
     let volTotalSemColar = volManhaSemColar + volTardeSemColar;
 
