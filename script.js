@@ -46,7 +46,7 @@ function atualizarTotal() {
 
     // 2. LÓGICA DE CÁLCULO 
     // Dosagens Unitárias Manhã em litros
-    const doseAmareloManha = 3;
+    const doseAmareloManha = 4;
     const doseAzul1Manha = 4;
     const doseAzul2Manha = 4;
     const doseVerdeManha = 4;
@@ -92,8 +92,8 @@ function atualizarTotal() {
 
     
    // ***** Cálculo do total de sucedâneo em gramas para cada tambor e total geral *****
-   let qtSucTotalTarde = volTotalTarde * 135;
-   let qtSucTotalManha = volTotalManha * 135;
+   let qtSucTotalTarde = volTotalTarde * 140;
+   let qtSucTotalManha = volTotalManha * 140;
 
 
     //Quantidade de sucedâneo utilizado para o preparo do leite do dia
@@ -101,17 +101,17 @@ function atualizarTotal() {
 
     //calculo dos tambores completos e o restante da manhã
     var tamborInteiroManha = Math.trunc(volTotalManha/50);
-    var sucTamborInteiroManha = ((tamborInteiroManha*50)*135).toFixed(0);
+    var sucTamborInteiroManha = ((tamborInteiroManha*50)*140).toFixed(0);
     var tamborRestanteManha = (volTotalManha/50)-tamborInteiroManha;
-    var sucTamborRestanteManha = ((tamborRestanteManha*50)*135).toFixed(0);
+    var sucTamborRestanteManha = ((tamborRestanteManha*50)*140).toFixed(0);
     var litrosTamborRestanteManha = (tamborRestanteManha*50).toFixed(1);
     
 
     //calculo dos tambores completos e o restante da tarde
     var tamborInteiroTarde = Math.trunc(volTotalTarde/50);
-    var sucTamborInteiroTarde = ((tamborInteiroTarde*50)*135).toFixed(0);
+    var sucTamborInteiroTarde = ((tamborInteiroTarde*50)*140).toFixed(0);
     var tamborRestanteTarde = (volTotalTarde/50)-tamborInteiroTarde;
-    var sucTamborRestanteTarde = ((tamborRestanteTarde*50)*135).toFixed(0);
+    var sucTamborRestanteTarde = ((tamborRestanteTarde*50)*140).toFixed(0);
     var litrosTamborRestanteTarde = (tamborRestanteTarde*50).toFixed(1);
 
   
@@ -137,7 +137,7 @@ btnManha.addEventListener('click', function(){
 
     
     document.querySelector('#pela-manha').textContent = `Pela manhã: ${valores.volTotalManha} litros usando ${valores.qtSucTotalManha}g ou ${(valores.qtSucTotalManha)/1000}kg de sucedâneo para ${valores.totalAnimais} animais.
-    Fazer ${valores.tamborInteiroManha} tambor usando ${valores.sucTamborInteiroManha}g de sucedâneo; e ${valores.litrosTamborRestanteManha}L usando ${(tamborRestanteManha*50)*135}g de sucedâneo.`;    
+    Fazer ${valores.tamborInteiroManha} tambor usando ${valores.sucTamborInteiroManha}g de sucedâneo; e ${valores.litrosTamborRestanteManha}L usando ${(tamborRestanteManha*50)*140}g de sucedâneo.`;    
    
     
 });
@@ -151,6 +151,6 @@ btnTarde.addEventListener('click', function(){
   
 
     document.querySelector('#pela-manha').textContent = `Pela tarde: ${valores.volTotalTarde} litros usando ${valores.qtSucTotalTarde}g ou ${(valores.qtSucTotalTarde)/1000}kg de sucedâneo para ${valores.totalAnimais} animais.
-    Fazer ${valores.tamborInteiroTarde} tambor usando ${(valores.tamborInteiroTarde*50)*135}g de sucedâneo; e ${valores.litrosTamborRestanteTarde}L usando ${valores.sucTamborRestanteTarde}g de sucedâneo.`; 
+    Fazer ${valores.tamborInteiroTarde} tambor usando ${(valores.tamborInteiroTarde*50)*140}g de sucedâneo; e ${valores.litrosTamborRestanteTarde}L usando ${valores.sucTamborRestanteTarde}g de sucedâneo.`; 
     
 }); 
